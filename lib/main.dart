@@ -26,12 +26,15 @@ Route _createRoute() {
       final begin = Offset(0.0, 1.0);
       final end = Offset.zero;
       final curve = Curves.ease;
-      final tween =
-          Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-      final offsetAnimation = animation.drive(tween);
+
+      final tween =Tween(begin: begin, end: end)
+      final curevedAnimation = CurvedAnimation(
+        parent: animation,
+        curve: curve,
+      );
 
       return SlideTransition(
-        position: offsetAnimation,
+        position: tween.animate(curevedAnimation),
         child: child,
       );
     },
